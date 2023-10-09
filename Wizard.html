@@ -11,7 +11,7 @@
 
 <body class="flex-column min-100-vh">
   <header class="hero">
-    <h1 class="app-title"><i class="fab fa-github"></i> Weather Wizard</h1>
+    <h1 class="app-title">Weather Wizard</h1>
     <p>Search a City For Weather Information
     </p>
   </header>
@@ -36,18 +36,31 @@
     <div class="col-12 col-md-4">
         <div class="card">
         <h3 class="card-header text-uppercase">Search Weather</h3>
-        <form id="user-form" class="card-body">
+        <form id="searchForm" class="card-body">
             <label class="form-label" for="cityInput">City Name</label>
-            <input name="weather" id="weather" type="text" autofocus="true" class="form-input" />
+            <input name="weather" id="cityInput" type="text" autofocus="true" class="form-input" />
             <button type="submit" class="btn">Get Weather</button>
+            </form>
 
             <!-- <input type="text" id="cityInput" placeholder="Enter city name" required> -->
             <!-- <button type="submit">Search</button> -->
-            
-            <div id="searchHistory"></div>
+
+            <div class="card">
+            <div id="searchHistory">
+
+                <!-- <button id= "searchHistory" class="btn"> Search History</button> -->
+            </div>
+
+
+
             <div id="weatherInfo"></div>
-          </form>
+            </div>
+
+            
+          
         </div>
+
+
   </main>
 
 

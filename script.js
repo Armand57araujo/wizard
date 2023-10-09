@@ -1,4 +1,5 @@
-const API_KEY = 'api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=5968b859cc10d7e72cd116fba774bb27';
+const API_KEY = '5968b859cc10d7e72cd116fba774bb27';
+const BASE_URL = "https://api.openweathermap.org"
 const searchForm = document.getElementById('searchForm');
 const cityInput = document.getElementById('cityInput');
 const weatherInfo = document.getElementById('weatherInfo');
@@ -12,10 +13,13 @@ searchForm.addEventListener('submit', (e) => {
         addToSearchHistory(city);
     }
     cityInput.value = '';
+
+    deleteItems() 
 });
 
 function getWeather(city) {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
+
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
@@ -46,3 +50,80 @@ function addToSearchHistory(city) {
     historyItem.addEventListener('click', () => getWeather(city));
     searchHistory.appendChild(historyItem);
 }
+
+
+function displayWeather(data) {
+    const weatherCards = document.getElementById('weatherCards');
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.innerHTML = `
+    <a link= ${data.cityName} </a>
+    <p>Date: ${data.date}</p>
+    <img src="${data.icon}" alt="Weather Icon">
+    <p>Temperature: ${data.temperature}°C</p>
+    <p>Humidity: ${data.humidity}%</p>
+    <p>Wind Speed: ${data.windSpeed} m/s</p>
+    `;
+    weatherCards.appendChild(card);
+
+}
+
+
+
+function addToSearchHistory(city) {
+    const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    searchHistory.push(city);
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+
+    displaySearchHistory();
+}
+
+
+
+
+// function displaySearchHistory() {
+//     const searchHistoryContainer = document.getElementById('searchHistory');
+//     searchHistoryContainer.innerHTML = '<h2>Search History</h2>';
+
+//     const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+
+//     searchHistory.forEach(city => {
+//         const historyItem = document.createElement('button'); 
+//          historyItem.classList.add('historyItem');
+//         historyItem.textContent = city;
+//         historyItem.addEventListener('click', () => getWeatherData(city));
+//         searchHistoryContainer.appendChild(historyItem);
+//     });
+// }
+
+
+function displaySearchHistory() {
+    const searchHistoryContainer = document.getElementById('searchHistory');
+    searchHistoryContainer.innerHTML = '';
+    const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    for (let i = searchHistory.length - 1; i >= 0; i--) {
+        const historyItem = document.createElement('button');
+        historyItem.setAttribute('type', 'button');
+        historyItem.classList.add('historyItem');
+        historyItem.textContent = searchHistory[i];
+        historyItem.addEventListener('click', () => getWeatherData(searchHistory[i]));
+        searchHistoryContainer.appendChild(historyItem);
+
+    }
+}
+
+
+
+
+
+
+
+
+
+function deleteItems() { 
+    localStorage.clear();
+}
+
+
+
+document.addEventListener('DOMContentLoaded', displaySearchHistory);
