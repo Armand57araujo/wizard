@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+  }
+
+
+body {
+    font-family: "IBM Plex Sans", sans-serif;
+    text-align: center;
+    background-color: var(--primary);
+    margin: 0;
+    padding: 0;
+    color: var(--);
+    line-height: 1.5;
+    font-size: 16px;
+  }
+
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-weight: 700;
+    margin: 0;
+    color: var(--d);
+    line-height: 1.25;
+}
+
+form {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#searchHistory {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+#searchHistory a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+#searchHistory a:hover {
+    text-decoration: underline;
+}
