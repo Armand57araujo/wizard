@@ -14,8 +14,23 @@ searchForm.addEventListener('submit', (e) => {
     }
     cityInput.value = '';
 
-    deleteItems() 
+    // deleteItems() 
 });
+
+function getForecost(lat, lon)
+{ const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+    
+    fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+console.log(data)
+
+
+
+    })
+
+
+}
 
 function getWeather(city) {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
@@ -29,6 +44,10 @@ function getWeather(city) {
             const windSpeed = wind.speed;
             const icon = weather[0].icon;
             const description = weather[0].description;
+            const lat = data.coord.lat;
+            const lon = data.coord.lon;
+            console.log(data)
+            getForecost(lat, lon)
 
             weatherInfo.innerHTML = `
 <h2>${name}</h2>
@@ -41,6 +60,7 @@ function getWeather(city) {
 `;
         })
         .catch(error => console.error('Error:', error));
+    
 }
 
 function addToSearchHistory(city) {
